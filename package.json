@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "isomorphic-ws": "^5.0.0",
-    "node-es-transformer": "^1.0.0-beta2",
-    "typescript": "^5.7.2"
+    "node-es-transformer": "file:../node-es-transformer",
+    "typescript": "^5.7.2",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1"
+    "@types/node": "^22.10.1",
+    "@types/ws": "^8.5.13"
   }
 }
