@@ -1,41 +1,14 @@
 import WebSocket from "isomorphic-ws";
-import * as transformer from "node-es-transformer";
-import { Transform, Readable } from "stream";
+// @ts-expect-error
+import transformer from "node-es-transformer";
+import { Readable } from "stream";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-// Elasticsearch connection configuration
-const esTransformer = transformer({
-  clientOptions: {
-    node: "http://localhost:9200", // Your Elasticsearch node URL
-  },
-  index: "bluesky-firehose",
-  bulkSize: 1000, // Number of documents per bulk request
-});
+const esNode = process.env.ES_NODE || "http://localhost:9200";
 
 // Firehose WebSocket URL
 const FIREHOSE_URL = "wss://bsky.network/xrpc/com.atproto.sync.subscribeRepos";
-
-// Custom transformation logic for RepoCommitEvent
-const transformStream = new Transform({
-  objectMode: true,
-  transform(event, encoding, callback) {
-    try {
-      // Transform event into Elasticsearch document
-      const document = {
-        index: { _id: `${event.repo}-${event.seq}` }, // Unique ID
-        doc: {
-          repo: event.repo,
-          ops: event.ops,
-          blocks: event.blocks,
-          seq: event.seq,
-          time: event.time,
-        },
-      };
-      callback(null, document);
-    } catch (error) {
-      callback(error);
-    }
-  },
-});
 
 // Firehose Readable Stream
 class FirehoseStream extends Readable {
@@ -82,5 +55,13 @@ class FirehoseStream extends Readable {
 // Create a Firehose stream
 const firehoseStream = new FirehoseStream();
 
-// Pipe data through the transformation and ingestion pipeline
-firehoseStream.pipe(transformStream).pipe(esTransformer);
+// Elasticsearch connection configuration
+const esTransformer = transformer({
+  targetClientConfig: {
+    node: esNode,
+    tls: { rejectUnauthorized: false },
+  },
+  targetIndexName: "bluesky-firehose",
+  stream: firehoseStream,
+  bulkSize: 1000, // Number of documents per bulk request
+});

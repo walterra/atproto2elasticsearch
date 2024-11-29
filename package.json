@@ -10,6 +10,7 @@
     "start": "node dist/firehoseConsumer.js"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "isomorphic-ws": "^5.0.0",
     "node-es-transformer": "file:../node-es-transformer",
     "typescript": "^5.7.2",
