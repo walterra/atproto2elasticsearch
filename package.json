@@ -1,0 +1,20 @@
+{
+  "name": "atproto2elasticsearch",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:walterra/atproto2elasticsearch.git",
+  "author": "Walter Rafelsberger <walter@rafelsberger.at>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/firehoseConsumer.js"
+  },
+  "dependencies": {
+    "isomorphic-ws": "^5.0.0",
+    "node-es-transformer": "^1.0.0-beta2",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1"
+  }
+}
