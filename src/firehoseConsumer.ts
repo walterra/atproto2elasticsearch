@@ -1,50 +1,63 @@
-import WebSocket from "isomorphic-ws";
 // @ts-expect-error
 import transformer from "node-es-transformer";
 import { Readable } from "stream";
 import * as dotenv from "dotenv";
+import { Firehose } from "@skyware/firehose";
+
 dotenv.config();
 
 const esNode = process.env.ES_NODE || "http://localhost:9200";
-
-// Firehose WebSocket URL
-const FIREHOSE_URL = "wss://bsky.network/xrpc/com.atproto.sync.subscribeRepos";
+const targetIndexName = process.env.ES_INDEX || "bluesky-firehose";
 
 // Firehose Readable Stream
 class FirehoseStream extends Readable {
-  private ws: WebSocket;
+  private firehose: Firehose;
 
   constructor() {
     super({ objectMode: true });
-    this.ws = new WebSocket(FIREHOSE_URL);
+    this.firehose = new Firehose({
+      autoReconnect: true,
+    });
     this.setupListeners();
+    this.firehose.start();
   }
 
   private setupListeners() {
-    this.ws.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data.toString());
-        if (data.repo) {
-          this.push(data);
+    console.log("setupListeners");
+    this.firehose.on("websocketError", (error) => {
+      console.error("Firehose websocketError:", error);
+    });
+
+    this.firehose.on("error", (error) => {
+      console.error("Firehose error:", error);
+    });
+
+    this.firehose.on("commit", (message) => {
+      for (const op of message.ops) {
+        if (
+          op.action === "create" &&
+          op.record["$type"] === "app.bsky.feed.post"
+        ) {
+          const uri = "at://" + message.repo + "/" + op.path;
+          const url = `https://bsky.app/profile/${message.repo}/post/${
+            op.path.split("/")[1]
+          }`;
+
+          // Create the object to be pushed
+          const data = {
+            repo: message.repo,
+            path: op.path,
+            uri,
+            url,
+            record: op.record,
+            timestamp: message.time,
+          };
+
+          // Push the stringified version of the data
+          this.push(JSON.stringify(data) + "\n"); // Convert to string before pushing
         }
-      } catch (error) {
-        console.error("Error parsing WebSocket message:", error);
       }
-    };
-
-    this.ws.onclose = () => {
-      console.log("WebSocket connection closed. Reconnecting...");
-      setTimeout(() => this.reconnect(), 5000);
-    };
-
-    this.ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-  }
-
-  private reconnect() {
-    this.ws = new WebSocket(FIREHOSE_URL);
-    this.setupListeners();
+    });
   }
 
   _read() {
@@ -61,7 +74,13 @@ const esTransformer = transformer({
     node: esNode,
     tls: { rejectUnauthorized: false },
   },
-  targetIndexName: "bluesky-firehose",
+  targetIndexName,
   stream: firehoseStream,
-  bulkSize: 1000, // Number of documents per bulk request
+  bufferSize: 10,
+  mappings: {
+    properties: {
+      repo: { type: "keyword" },
+      timestamp: { type: "date" },
+    },
+  },
 });

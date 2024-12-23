@@ -6,18 +6,18 @@
   "author": "Walter Rafelsberger <walter@rafelsberger.at>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/firehoseConsumer.js"
+    "build": "node build.js",
+    "start": "node dist/bundle.js"
   },
   "dependencies": {
+    "@skyware/firehose": "^0.3.2",
     "dotenv": "^16.4.5",
-    "isomorphic-ws": "^5.0.0",
-    "node-es-transformer": "file:../node-es-transformer",
-    "typescript": "^5.7.2",
-    "ws": "^8.18.0"
+    "node-es-transformer": "^1.0.0-beta3",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
-    "@types/ws": "^8.5.13"
+    "esbuild": "^0.24.0",
+    "tsc-alias": "^1.8.10"
   }
 }
