@@ -1,6 +1,6 @@
 {
   "name": "atproto2elasticsearch",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "main": "index.js",
   "repository": "git@github.com:walterra/atproto2elasticsearch.git",
   "author": "Walter Rafelsberger <walter@rafelsberger.at>",
