@@ -37,10 +37,10 @@
   resolved "https://registry.yarnpkg.com/@atcute/varint/-/varint-1.0.1.tgz#123cbff0d05cc331c7ef15a2ea1e8a179cf07d8a"
   integrity sha512-GXWu+CIfpQGSMSOSUskjwU/licxH8WcyX4t11mRKafQIE4Yi3v5GuchMYVOu89YX15tY93QzY/0zMQDCWoke8Q==
 
-"@elastic/elasticsearch@^8.15.0":
-  version "8.16.2"
-  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-8.16.2.tgz#67d75bf7f642cd7f8eea583186bb87da6e42359b"
-  integrity sha512-2ivc6uS97fbEeW4tNtg5mvh/Jy82ZLfcwQ1HhNhdYxyapNnQxIgZ83Zd8Ir+5jCPMDWKSYgwDb8t4GAINDDv2w==
+"@elastic/elasticsearch@^8.17.0":
+  version "8.17.0"
+  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-8.17.0.tgz#0214265bc04a3fe0d23a410b8d08b28217aac540"
+  integrity sha512-FZ+gQUrPsMpQ2RRIXwTmCoUeFCEausMhp4eQOyxT9j1cwGXHJrhelR6jffM1SC95kQUkB7+TcTq7oQ+bG2BQ9g==
   dependencies:
     "@elastic/transport" "^8.9.1"
     apache-arrow "^18.0.0"
@@ -661,12 +661,12 @@ mylas@^2.1.9:
   resolved "https://registry.yarnpkg.com/mylas/-/mylas-2.1.13.tgz#1e23b37d58fdcc76e15d8a5ed23f9ae9fc0cbdf4"
   integrity sha512-+MrqnJRtxdF+xngFfUUkIMQrUUL0KsxbADUkn23Z/4ibGg192Q+z+CQyiYwvWTsYjJygmMR8+w3ZDa98Zh6ESg==
 
-node-es-transformer@^1.0.0-beta3:
-  version "1.0.0-beta3"
-  resolved "https://registry.yarnpkg.com/node-es-transformer/-/node-es-transformer-1.0.0-beta3.tgz#534d6fb8eb89fb46346e5fe8b351b3074a1f1935"
-  integrity sha512-GWRI9VB/3Z7hRpcf2XUX8jWYhDwUbqcZYbfNmiSu3KQDM2IHZ/8PA6gkKBFCGQjzk3+LXXP1ZBep3sep+9Gmow==
+node-es-transformer@^1.0.0-beta5:
+  version "1.0.0-beta5"
+  resolved "https://registry.yarnpkg.com/node-es-transformer/-/node-es-transformer-1.0.0-beta5.tgz#7ff81b562a62f760d43e0b3c5e046c8f48f78acf"
+  integrity sha512-NXWuIp2J3NGB6CLMjZ6g+S4MFbrziITuWtU4+6fd/afjfmTskQ2yLk7UWiuegO8Vj2vzcWl6JSXu0aSaxZOYmA==
   dependencies:
-    "@elastic/elasticsearch" "^8.15.0"
+    "@elastic/elasticsearch" "^8.17.0"
     cli-progress "^3.12.0"
     event-stream "3.3.4"
     git-cz "^4.9.0"
