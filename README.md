@@ -18,3 +18,17 @@ ES_NODE=https://<username>:<password>@localhost:9200 npx atproto2elasticsearch
 ## feedback
 
 [Create an issue](https://github.com/walterra/atproto2elasticsearch/issues) in the repo or contact me on Bluesky: https://bsky.app/profile/walterra.dev
+
+## development
+
+Clone this repository and install its dependencies:
+
+```bash
+git clone https://github.com/walterra/atproto2elasticsearch
+cd atproto2elasticsearch
+yarn
+```
+
+`yarn build` builds the library to `dist`.
+
+To commit, use `cz`. To prepare a release, use e.g. `yarn release -- --release-as 1.0.0-alpha1`.
