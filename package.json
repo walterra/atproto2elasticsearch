@@ -9,6 +9,7 @@
     "build": "node build.js",
     "start": "node dist/bundle.js",
     "pretest": "node build.js",
+    "prepublishOnly": "node build.js",
     "release": "commit-and-tag-version"
   },
   "bin": "bin/atproto2elasticsearch.js",
@@ -26,6 +27,9 @@
     "git-cz": "^4.9.0",
     "tsc-alias": "^1.8.10"
   },
+  "files": [
+    "dist"
+  ],
   "config": {
     "commitizen": {
       "path": "git-cz"
