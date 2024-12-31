@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "node build.js",
-    "start": "node dist/bundle.js"
+    "start": "node dist/bundle.js",
+    "pretest": "node build.js",
+    "release": "commit-and-tag-version"
   },
   "bin": "bin/atproto2elasticsearch.js",
   "dependencies": {
