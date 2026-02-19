@@ -1,6 +1,6 @@
 {
   "name": "atproto2elasticsearch",
-  "version": "1.0.0-alpha4",
+  "version": "1.0.0",
   "description": "CLI tool that connects to the Bluesky (AT Protocol) firehose and indexes posts into Elasticsearch.",
   "keywords": [
     "atproto",
