@@ -7,6 +7,8 @@ Complete guide for releasing new versions of atproto2elasticsearch.
 Before creating any release:
 
 - [ ] `yarn build` succeeds locally
+- [ ] `yarn test` and `yarn typecheck` succeed
+- [ ] Dependency audit reviewed (`yarn audit`, `yarn outdated`)
 - [ ] No uncommitted changes
 - [ ] On `main` branch
 
@@ -28,9 +30,9 @@ yarn changeset
 
 **Changeset prompts:**
 1. Select version bump type:
-   - **patch** (0.0.x): Bug fixes, docs, internal refactors
-   - **minor** (0.x.0): New features, non-breaking additions
-   - **major** (x.0.0): Breaking changes, API removals
+   - **patch**: bug fixes, docs, internal refactors
+   - **minor**: new features, non-breaking additions
+   - **major**: breaking changes, API removals
 2. Write a concise summary (appears in CHANGELOG.md)
 
 **One changeset per PR** - combine all changes into a single changeset.
@@ -99,6 +101,10 @@ yarn install --frozen-lockfile
 
 # Build
 yarn build
+
+# Tests
+yarn test
+yarn typecheck
 
 # Dry-run packaging
 npm pack --dry-run

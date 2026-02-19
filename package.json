@@ -1,18 +1,42 @@
 {
   "name": "atproto2elasticsearch",
   "version": "1.0.0-alpha4",
-  "main": "index.js",
-  "repository": "git@github.com:walterra/atproto2elasticsearch.git",
+  "description": "CLI tool that connects to the Bluesky (AT Protocol) firehose and indexes posts into Elasticsearch.",
+  "keywords": [
+    "atproto",
+    "bluesky",
+    "firehose",
+    "elasticsearch",
+    "bulk-indexing",
+    "streaming",
+    "cli",
+    "nodejs",
+    "search"
+  ],
+  "homepage": "https://github.com/walterra/atproto2elasticsearch#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/walterra/atproto2elasticsearch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/walterra/atproto2elasticsearch/issues"
+  },
   "author": "Walter Rafelsberger <walter@rafelsberger.at>",
   "license": "MIT",
   "engines": {
     "node": ">=22.0.0"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": "bin/atproto2elasticsearch.js",
   "scripts": {
-    "build": "node build.js",
-    "start": "node dist/bundle.js",
-    "pretest": "node build.js",
-    "prepublishOnly": "node build.js",
+    "build": "node build.js && yarn build:types",
+    "build:types": "tsc -p tsconfig.build.json",
+    "start": "node dist/cli.js",
+    "test": "node --test",
+    "typecheck": "tsc --noEmit",
+    "pretest": "yarn build",
+    "prepublishOnly": "yarn build",
     "changeset": "changeset",
     "changeset:add": "changeset add",
     "changeset:status": "changeset status",
@@ -20,27 +44,28 @@
     "pack": "npm pack",
     "pack:dry-run": "npm pack --dry-run"
   },
-  "bin": "bin/atproto2elasticsearch.js",
   "dependencies": {
     "@skyware/firehose": "^0.3.2",
     "cli-progress": "^3.12.0",
     "dotenv": "^16.4.5",
     "node-es-transformer": "^1.2.1",
-    "pino": "^10.1.0",
-    "typescript": "^5.7.2"
+    "pino": "^10.1.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
     "@changesets/get-github-info": "^0.7.0",
+    "@types/cli-progress": "^3.11.6",
     "@types/node": "^22.10.1",
     "esbuild": "^0.24.0",
     "git-cz": "^4.9.0",
-    "tsc-alias": "^1.8.10"
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.7.2"
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "examples"
   ],
   "config": {
     "commitizen": {
