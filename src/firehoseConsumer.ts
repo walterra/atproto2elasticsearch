@@ -9,6 +9,8 @@ dotenv.config();
 
 const esNode = process.env.ES_NODE || "http://localhost:9200";
 const targetIndexName = process.env.ES_INDEX || "bluesky-firehose-ner-0001";
+const bufferSizeKbEnv = Number.parseInt(process.env.ES_BUFFER_KB || "", 10);
+const bufferSizeKb = Number.isFinite(bufferSizeKbEnv) && bufferSizeKbEnv > 0 ? bufferSizeKbEnv : 5120;
 
 // create a new progress bar instance and use shades_classic theme
 const multiBar = new cliProgress.MultiBar(
@@ -106,7 +108,7 @@ transformer({
   },
   targetIndexName,
   stream: firehoseStream,
-  bufferSize: 10,
+  bufferSize: bufferSizeKb,
   mappings: {
     properties: {
       repo: { type: "keyword" },
