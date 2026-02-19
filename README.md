@@ -13,6 +13,7 @@ ES_NODE=https://<username>:<password>@localhost:9200 npx atproto2elasticsearch
 ## setup
 
 - Create a `.env` file and add your Elasticsearch endpoint, e.g. `ES_NODE=https://<username>:<password>@localhost:9200`.
+- Optional: set `ES_BUFFER_KB=5120` to control the node-es-transformer bulk buffer size (in KB).
 - Run `yarn`, `yarn build` and `yarn start`.
 
 ## feedback
