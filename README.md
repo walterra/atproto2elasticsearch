@@ -12,6 +12,7 @@ ES_NODE=https://<username>:<password>@localhost:9200 npx atproto2elasticsearch
 
 ## setup
 
+- Requires Node.js 22+ (see `.nvmrc`).
 - Create a `.env` file and add your Elasticsearch endpoint, e.g. `ES_NODE=https://<username>:<password>@localhost:9200`.
 - Optional: set `ES_BUFFER_KB=5120` to control the node-es-transformer bulk buffer size (in KB).
 - Run `yarn`, `yarn build` and `yarn start`.
@@ -32,4 +33,4 @@ yarn
 
 `yarn build` builds the library to `dist`.
 
-To commit, use `cz`. To prepare a release, use e.g. `yarn release -- --release-as 1.0.0-alpha1`.
+To commit, use `cz`. For releases, add a changeset with `yarn changeset` and follow the workflow in [RELEASE.md](RELEASE.md).

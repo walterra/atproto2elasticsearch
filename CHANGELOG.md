@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [Changesets](https://github.com/changesets/changesets) for release guidelines.
 
 ## [1.0.0-alpha4](https://github.com/walterra/atproto2elasticsearch/compare/v1.0.0-alpha3...v1.0.0-alpha4) (2024-12-31)
 
@@ -15,6 +15,3 @@ All notable changes to this project will be documented in this file. See [commit
 
 * progress bars ([3b67e1b](https://github.com/walterra/atproto2elasticsearch/commit/3b67e1b3696d11efd164a17e84ff668e78205cde))
 
-# Changelog
-
-All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.

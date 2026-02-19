@@ -4,8 +4,16 @@ import { Readable } from "stream";
 import * as dotenv from "dotenv";
 import { Firehose } from "@skyware/firehose";
 import cliProgress from "cli-progress";
+import pino from "pino";
 
 dotenv.config();
+
+const logger = pino(
+  {
+    name: "atproto2elasticsearch",
+  },
+  pino.destination(2)
+);
 
 const esNode = process.env.ES_NODE || "http://localhost:9200";
 const targetIndexName = process.env.ES_INDEX || "bluesky-firehose-ner-0001";
@@ -48,15 +56,15 @@ class FirehoseStream extends Readable {
 
   private setupListeners() {
     this.firehose.on("info", (info) => {
-      console.error("Firehose info:", info);
+      logger.info({ info }, "Firehose info");
     });
 
     this.firehose.on("websocketError", (error) => {
-      console.error("Firehose websocketError:", error);
+      logger.error({ err: error }, "Firehose websocketError");
     });
 
     this.firehose.on("error", (error) => {
-      console.error("Firehose error:", error);
+      logger.error({ err: error }, "Firehose error");
     });
 
     this.firehose.on("commit", (message) => {
@@ -87,7 +95,7 @@ class FirehoseStream extends Readable {
           }
         }
       } catch (error) {
-        console.error("Error processing message:", error);
+        logger.error({ err: error }, "Error processing message");
       }
     });
   }
